@@ -13,6 +13,9 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 	
 	@Autowired
 	private EmployeePayrollRepository empPayrollRepository;
+	
+	@Autowired
+	private EmailService emailService;
 
 	@Override
 	public List<EmployeePayrollData> getEmployeePayrollData() {
@@ -26,6 +29,7 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 
 	@Override
 	public EmployeePayrollData createEmployeePayrollData(EmployeePayrollData empPayrollData) {
+		emailService.sendSimpleMessage("2016179@iiitdmj.ac.in", "Registered in Employee Payroll App", "Successfully Added to Employee Payroll App");
 		return empPayrollRepository.save(empPayrollData);
 	}
 
@@ -39,9 +43,5 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 	public void deleteEmployeePayrollData(int empId) {
 		empPayrollRepository.deleteById(empId);	
 	}
-
-
-	
-	
 
 }
